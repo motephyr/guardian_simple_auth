@@ -29,6 +29,12 @@ use Mix.Config
 #
 #     import_config "#{Mix.env}.exs"
 
-config :guardian_simple_auth, otp_app: :dresser
-config :guardian_simple_auth, user_schema: Dresser.Coherence.User
-config :guardian_simple_auth, repo: Dresser.Repo
+config :guardian_simple_auth, 
+  otp_app: :dresser,
+  user_schema: MY.User,
+  repo: MY.Repo
+
+config :guardian, Guardian.DB,
+  repo: MY.Repo,
+  schema_name: "guardian_tokens", # default
+  sweep_interval: 60 # default: 60 minutes

@@ -28,3 +28,7 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+config :guardian_simple_auth, otp_app: :dresser
+config :guardian_simple_auth, user_schema: Dresser.Coherence.User
+config :guardian_simple_auth, repo: Dresser.Repo

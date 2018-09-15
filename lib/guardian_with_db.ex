@@ -1,4 +1,4 @@
-defmodule GuardianSimpleAuth.Guardian do
+defmodule GuardianSimpleAuth.GuardianWithDb do
   use Guardian, otp_app: Application.get_env(:guardian_simple_auth, :otp_app)
 
   def subject_for_token(resource, _claims) do
@@ -21,4 +21,22 @@ defmodule GuardianSimpleAuth.Guardian do
   # def resource_from_claims(_claims) do
   #   {:error, :reason_for_error}
   # end
+
+  def after_encode_and_sign(resource, claims, token, _options) do
+    with {:ok, _} <- Guardian.DB.after_encode_and_sign(resource, claims["typ"], claims, token) do
+      {:ok, token}
+    end
+  end
+
+  def on_verify(claims, token, _options) do
+    with {:ok, _} <- Guardian.DB.on_verify(claims, token) do
+      {:ok, claims}
+    end
+  end
+
+  def on_revoke(claims, token, _options) do
+    with {:ok, _} <- Guardian.DB.on_revoke(claims, token) do
+      {:ok, claims}
+    end
+  end
 end

@@ -10,7 +10,7 @@ by adding `guardian_simple_auth` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:guardian_simple_auth, "~> 0.1.0"}
+    {:guardian_simple_auth, "~> 0.2.0"}
   ]
 end
 ```
